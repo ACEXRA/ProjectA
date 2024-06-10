@@ -1,6 +1,7 @@
 package com.example.loginDemo.User.service;
 
 import com.example.loginDemo.User.entity.UserEntity;
+import com.example.loginDemo.User.exception.UserNotFoundException;
 import com.example.loginDemo.User.middleware.PasswordHasher;
 import com.example.loginDemo.User.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService{
     public Optional<UserEntity> getUserById(String id){
         return userRepository.findById(id);
     }
-    public UserEntity userEdit(UserEntity user,String id){
+    public UserEntity userEdit(UserEntity user,String id) {
         Optional<UserEntity> existingUser=userRepository.findById(id);
         if(existingUser.isPresent()){
             existingUser.get().setName(user.getName());
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService{
             existingUser.get().setPassword(passwordHasher.passwordHashing(user.getPassword()));
             return userRepository.save(existingUser.get());
         }else {
-            return null;
+            throw new UserNotFoundException("User doesn't exist");
         }
     }
 }

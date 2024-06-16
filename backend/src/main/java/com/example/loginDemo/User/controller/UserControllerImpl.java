@@ -28,5 +28,9 @@ public class UserControllerImpl{
     public UserEntity userEdit(@RequestBody UserEntity user,@PathVariable (value = "id")String id){
         return userService.userEdit(user,id);
     }
+    @DeleteMapping("/{id}")
+    public String userDelete(@PathVariable(value = "id")String id){
+        return userService.userDelete(id);
+    }
 
 }

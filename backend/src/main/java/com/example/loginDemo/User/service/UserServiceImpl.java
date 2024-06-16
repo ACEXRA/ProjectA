@@ -35,4 +35,9 @@ public class UserServiceImpl{
             throw new UserNotFoundException("User doesn't exist");
         }
     }
+    public String userDelete(String id){
+        UserEntity existingUser=userRepository.findById(id).orElseThrow(()->new UserNotFoundException("User not found Exception"));
+        userRepository.delete(existingUser);
+        return "User deleted Successfully";
+    }
 }

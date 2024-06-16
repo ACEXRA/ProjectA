@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
-public class UserControllerImpl implements UserController{
+public class UserControllerImpl{
     @Autowired
     private UserServiceImpl userService;
     @GetMapping("/getRequestTest")
@@ -28,4 +28,5 @@ public class UserControllerImpl implements UserController{
     public UserEntity userEdit(@RequestBody UserEntity user,@PathVariable (value = "id")String id){
         return userService.userEdit(user,id);
     }
+
 }
